@@ -19,7 +19,7 @@ class ProfileCompletionMiddleware:
     def __call__(self, request):
         """Code to be executed for each request before the view is called."""
         if not request.user.is_anonymous:
-            if request.user.is_staff:
+            if not request.user.is_staff:
                 profile = request.user.profile
                 if not profile.picture or not profile.biography:
                     if request.path not in [reverse('update_profile'), reverse('logout')]:
